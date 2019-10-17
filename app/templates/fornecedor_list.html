@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Lista de Fornecedores
+{% endblock title %}
+
+{% block content %}
+
+<form method="get">
+
+  <input type="text" name="busca" placeholder="Buscar Fornecedor">
+  <button type="submit" class="btn btn-primary">Buscar</button>
+
+</form>
+ 
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>CNPJ</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for fornecedor in lista %}
+    <tr>
+        <td>{{ fornecedor.nome }}</td>
+        <td>{{ fornecedor.cnpj  }}</td>
+ 
+      <td>
+        <a href="{% url 'editar_fornecedor' pk=fornecedor.pk %}">
+      <i class="material-icons">mode_edit</i>
+        </a>
+        <a href="{% url 'remover_fornecedor' pk=fornecedor.pk %}">
+      <i class="material-icons">delete</i>
+        </a>
+      </td>
+ 
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<a href="{% url 'cadastrar_fornecedor' %}">
+<button type="submit" class="btn btn-primary">
+    Cadastrar
+</button>
+</a>
+ 
+{% endblock content %}
